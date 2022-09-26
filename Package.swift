@@ -4,25 +4,40 @@
 import PackageDescription
 
 let package = Package(
-    name: "swift-utilities",
+    name: "Utilities",
+    platforms: [
+        .iOS(.v13),
+        .macOS(.v10_12)
+    ],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
-        .library(
-            name: "swift-utilities",
-            targets: ["swift-utilities"]),
+        .library(name: "Log", targets: ["Log"]),
+        .library(name: "UtilitiesDate", targets: ["UtilitiesDate"]),
+        .library(name: "UtilitiesLocation", targets: ["UtilitiesLocation"]),
+        .library(name: "UtilitiesMisc", targets: ["UtilitiesMisc"]),
+        .library(name: "UtilitiesUserDefaults", targets: ["UtilitiesUserDefaults"]),
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "swift-utilities",
-            dependencies: []),
-        .testTarget(
-            name: "swift-utilitiesTests",
-            dependencies: ["swift-utilities"]),
+            name: "Log",
+            dependencies: [],
+            path: "Sources/Log"),
+        .target(
+            name: "UtilitiesDate",
+            dependencies: [],
+            path: "Sources/UtilitiesDate"),
+        .target(
+            name: "UtilitiesLocation",
+            dependencies: [],
+            path: "Sources/UtilitiesLocation"),
+        .target(
+            name: "UtilitiesMisc",
+            dependencies: [],
+            path: "Sources/UtilitiesMisc"),
+        .target(
+            name: "UtilitiesUserDefaults",
+            dependencies: [],
+            path: "Sources/UtilitiesUserDefaults"),
     ]
 )
