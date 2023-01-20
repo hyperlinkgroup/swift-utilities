@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Double {
+public extension Double {
     /**
     Divide the nanoseconds by one billion to get the value in seconds.
      - returns: Value in seconds

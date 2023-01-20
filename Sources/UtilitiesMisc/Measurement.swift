@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Measurement {
+public extension Measurement {
     func unitString() -> String {
         self.unit.symbol
     }

@@ -8,7 +8,7 @@
 import Foundation
 import MapKit
 
-extension MKMapView {
+public extension MKMapView {
     /**
      Center the map to a specified location.
      

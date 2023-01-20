@@ -8,7 +8,7 @@
 #if !os(macOS)
 import UIKit
 
-extension UIApplication {
+public extension UIApplication {
     static var keyWindow: UIWindow? {
         UIApplication.shared.connectedScenes
             .filter { $0.activationState == .foregroundActive }
@@ -19,6 +19,15 @@ extension UIApplication {
     
     static var visibleViewController: UIViewController? {
         keyWindow?.rootViewController?.presentedViewController ?? keyWindow?.rootViewController
+    }
+    
+    /**
+     Prüft, ob die Hierarchie der Application `UIRemoteKeyboardWindow` enthält, wenn ja heißt das, dass die Tastatur angezeigt
+    */
+    var isKeyboardPresented: Bool {
+        guard let keyboardWindowClass = NSClassFromString("UIRemoteKeyboardWindow") else { return false }
+        
+        return UIApplication.shared.windows.contains(where: { $0.isKind(of: keyboardWindowClass) })
     }
 }
 #endif

@@ -7,23 +7,27 @@
 
 import Foundation
 
-extension Int {
-    public func createTimeString() -> String {
+public extension Int {
+    func createTimeString() -> String {
         let minute = self / 60 % 60
         let second = self % 60
         
         return String(format: "%02i:%02i", minute, second)
     }
     
-    public init(date: Date) {
+    init(date: Date) {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         self.init(dateFormatter.string(from: date))!
     }
 
-    public func toDateFromUTC() -> Date? {
+    func toDateFromUTC() -> Date? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyyMMdd"
         return dateFormatter.date(from: String(self))
+    }
+    
+    func setWeekdayToUSDefault() -> Int {
+        self == 6 ? 0 : self + 1
     }
 }

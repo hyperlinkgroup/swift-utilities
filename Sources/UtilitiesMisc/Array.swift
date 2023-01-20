@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension Array {
+public extension Array {
     /**
      Get the middle element of an array.
      */

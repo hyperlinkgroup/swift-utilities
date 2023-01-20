@@ -8,7 +8,7 @@
 
 import Foundation
 
-extension Data {
+public extension Data {
     /**
      Text in utf8 umwandeln.
      

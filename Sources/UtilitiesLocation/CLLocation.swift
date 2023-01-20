@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 
 
-extension CLLocation {
+public extension CLLocation {
     
     func degreesToRadians(degrees: Double) -> Double {
         degrees * .pi / 180.0

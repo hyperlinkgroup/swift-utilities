@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 #endif
 
-extension Double {
+public extension Double {
     /**
      Cast the given double to an int to remove decimal places.
      - Returns: String with the int
@@ -34,5 +34,14 @@ extension Double {
      */
     func radiantValue() -> CGFloat {
         CGFloat(self  * .pi / 180)
+    }
+    
+    public func getCurrencyValue() -> String {
+        let currencyFormatter = NumberFormatter()
+        currencyFormatter.usesGroupingSeparator = true
+        currencyFormatter.numberStyle = .currency
+        currencyFormatter.locale = Locale.current
+        
+        return currencyFormatter.string(from: NSNumber(value: self)) ?? "n.a."
     }
 }
