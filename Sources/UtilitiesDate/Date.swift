@@ -22,19 +22,6 @@ extension Date {
     public var weekday: Int {
         return Calendar.current.component(.weekday, from: self)
     }
-    public var firstDayOfTheMonth: Date {
-        guard let firstDay = Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self)) else {
-            fatalError("Could not find first day of \(self)")
-        }
-        return firstDay
-    }
-    public var startOfDay: Date {
-        var calendar = Calendar.current
-        if let timeZone = TimeZone(identifier: "UTC") {
-            calendar.timeZone = timeZone
-        }
-        return calendar.startOfDay(for: self)
-    }
     
     public func getComponents() -> (year: Int, month: Int, day: Int, hour: Int, minute: Int) {
         let year = Calendar.current.component(.year, from: self)
@@ -46,6 +33,47 @@ extension Date {
         return (year: year, month: month, day: day, hour: hour, minute: minute)
     }
 }
+
+
+// MARK: - Start + End
+
+extension Date {
+    public var startOfDay: Date {
+        Calendar.current.startOfDay(for: self)
+    }
+    
+    public var endOfDay: Date? {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfDay)
+    }
+    
+    public var startOfWeek: Date? {
+        Calendar.current.dateComponents([.calendar, .yearForWeekOfYear, .weekOfYear], from: self).date
+    }
+    
+    public var endOfWeek: Date? {
+        guard let startOfWeek else { return nil }
+        var components = DateComponents()
+        components.weekOfYear = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfWeek)
+    }
+    
+    public var startOfMonth: Date? {
+        Calendar.current.date(from: Calendar.current.dateComponents([.year, .month], from: self))
+    }
+    
+    public var endOfMonth: Date? {
+        guard let startOfMonth else { return nil }
+        var components = DateComponents()
+        components.month = 1
+        components.second = -1
+        return Calendar.current.date(byAdding: components, to: startOfMonth)
+    }
+}
+
 
 // MARK: - Init
 
@@ -102,6 +130,7 @@ extension Date {
         return dates
     }
 }
+
 
 // MARK: - Formatting
 
@@ -193,7 +222,6 @@ extension Date {
     }
     
 }
-
 
 
 // MARK: - Modification, Calculation
@@ -300,11 +328,8 @@ extension Date {
         
         return Calendar.current.dateComponents([.day], from: dateOne, to: dateTwo).day ?? 0
     }
-    
-    
-    
-    
 }
+
 
 // MARK: - Encoding
 
