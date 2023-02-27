@@ -220,7 +220,10 @@ extension Date {
         
         return dateFormatter.string(from: self)
     }
-    
+
+    public func getWeekday() -> String {
+        DateFormatter().weekdaySymbols[self.weekday - 1]
+    }
 }
 
 
